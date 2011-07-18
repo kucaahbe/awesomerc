@@ -20,6 +20,8 @@ log("config directory: '" .. confdir   .. "'")
 log("theme file:       '" .. themefile .. "'")
 log("config file:      '" .. conffile .. "'")
 
+beautiful.init(themefile)
+
 -- tags
 local taglist = {
   { name = "main", selected = true },
@@ -44,6 +46,23 @@ topstatusbar = {}
 at_all_screens(function(screen)
   topstatusbar[screen] = awful.wibox.new({ position = 'top', screen = screen })
 end)
+
+command_prompt = {}
+at_all_screens(function(screen)
+  command_prompt[screen] = awful.widget.prompt({})
+end)
+at_all_screens(function(screen)
+  topstatusbar[screen].widgets = {
+    command_prompt[screen]
+  }
+end)
+
+-- keybindings
+log('loading keybindings')
+globalkeys = awful.util.table.join(
+    awful.key({ modkey },            "r",     function () command_prompt[mouse.screen]:run() end)
+)
+root.keys(globalkeys)
 
 awesome.spawn('google-chrome')
 
