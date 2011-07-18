@@ -33,6 +33,9 @@ for screen_n=1,screen.count() do
   end
 end
 
+-- statusbars
+topstatusbar = awful.wibox.new({ position = 'top' })
+
 awesome.spawn('google-chrome')
 
 log('------------- started --------------')
