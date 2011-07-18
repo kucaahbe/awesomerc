@@ -9,6 +9,7 @@ log('============= starting =============')
 
 -- awesome standard libs
 require('awful')
+require("awful.rules")
 
 -- variables
 local confdir   = awful.util.getdir('config')
@@ -61,5 +62,22 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey },            "r",     function () command_prompt[mouse.screen]:run() end)
 )
 root.keys(globalkeys)
+
+-- clientkeys
+clientkeys = awful.util.table.join(
+    awful.key({ modkey,    }, "c",      function (c) c:kill()                         end)
+)
+awful.rules.rules = {
+  -- All clients will match this rule.
+  {
+    rule = { },
+    properties = {
+      border_width = beautiful.border_width,
+      border_color = beautiful.border_normal,
+      focus = true,
+      keys = clientkeys,
+    }
+  },
+}
 
 log('------------- started --------------')
