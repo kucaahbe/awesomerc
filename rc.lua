@@ -43,15 +43,12 @@ end)
 
 -- statusbars
 topstatusbar = {}
-at_all_screens(function(screen)
-  topstatusbar[screen] = awful.wibox.new({ position = 'top', screen = screen })
-end)
-
 command_prompt = {}
 at_all_screens(function(screen)
+  topstatusbar[screen] = awful.wibox.new({ position = 'top', screen = screen })
+
   command_prompt[screen] = awful.widget.prompt({})
-end)
-at_all_screens(function(screen)
+
   topstatusbar[screen].widgets = {
     command_prompt[screen]
   }
