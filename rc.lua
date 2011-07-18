@@ -3,6 +3,8 @@ local log = function(text)
   print('[awesome-' .. awesome.version .. '] ' .. text)
 end
 
+local at_all_screens = function(func) for screen_n=1,screen.count() do func(screen_n) end end
+
 log('============= starting =============')
 
 -- awesome standard libs
@@ -19,22 +21,26 @@ log("theme file:       '" .. themefile .. "'")
 log("config file:      '" .. conffile .. "'")
 
 -- tags
-tags = {
+local taglist = {
   { name = "main", selected = true },
   { name = "www"  },
 }
-for screen_n=1,screen.count() do
-  for i,mytag in ipairs(tags) do
-    local newtag = tags[i]
-    log('adding tag(' .. newtag.name .. ') to screen ' .. screen_n)
-    tags[i]          = tag({ name = newtag.name })
-    tags[i].screen   = screen_n
-    tags[i].selected = newtag.selected or false
+tags = {}
+at_all_screens(function(screen)
+  for i,tagdef in ipairs(taglist) do
+    log('adding tag(' .. tagdef.name .. ') to screen ' .. screen)
+    tags[screen] = {}
+    tags[screen][i]          = tag({ name = tagdef.name })
+    tags[screen][i].screen   = screen
+    tags[screen][i].selected = tagdef.selected or false
   end
-end
+end)
 
 -- statusbars
-topstatusbar = awful.wibox.new({ position = 'top' })
+topstatusbar = {}
+at_all_screens(function(screen)
+  topstatusbar[screen] = awful.wibox.new({ position = 'top', screen = screen })
+end)
 
 awesome.spawn('google-chrome')
 
