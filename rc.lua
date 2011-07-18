@@ -29,10 +29,13 @@ tags = {}
 at_all_screens(function(screen)
   for i,tagdef in ipairs(taglist) do
     log('adding tag(' .. tagdef.name .. ') to screen ' .. screen)
-    tags[screen] = {}
-    tags[screen][i]          = tag({ name = tagdef.name })
-    tags[screen][i].screen   = screen
-    tags[screen][i].selected = tagdef.selected or false
+
+    local newtag    = tag({ name = tagdef.name })
+    newtag.screen   = screen
+    newtag.selected = tagdef.selected or false
+
+    if not tags[screen] then tags[screen] = {} end
+    tags[screen][i] = newtag
   end
 end)
 
