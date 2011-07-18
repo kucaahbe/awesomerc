@@ -59,13 +59,13 @@ end)
 log('loading keybindings')
 globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "r", awesome.restart),
-    awful.key({ modkey },            "r",     function () command_prompt[mouse.screen]:run() end)
+    awful.key({ modkey            }, "r", function () command_prompt[mouse.screen]:run() end)
 )
 root.keys(globalkeys)
 
 -- clientkeys
 clientkeys = awful.util.table.join(
-    awful.key({ modkey,    }, "c",      function (c) c:kill()                         end)
+    awful.key({ modkey,    }, "c", function (c) c:kill() end)
 )
 awful.rules.rules = {
   -- All clients will match this rule.
