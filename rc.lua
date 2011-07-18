@@ -18,6 +18,21 @@ log("config directory: '" .. confdir   .. "'")
 log("theme file:       '" .. themefile .. "'")
 log("config file:      '" .. conffile .. "'")
 
+-- tags
+tags = {
+  { name = "main", selected = true },
+  { name = "www"  },
+}
+for screen_n=1,screen.count() do
+  for i,mytag in ipairs(tags) do
+    local newtag = tags[i]
+    log('adding tag(' .. newtag.name .. ') to screen ' .. screen_n)
+    tags[i]          = tag({ name = newtag.name })
+    tags[i].screen   = screen_n
+    tags[i].selected = newtag.selected or false
+  end
+end
+
 awesome.spawn('google-chrome')
 
 log('------------- started --------------')
