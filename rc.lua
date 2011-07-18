@@ -1,0 +1,1 @@
+awesome.spawn('google-chrome')
