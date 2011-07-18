@@ -60,10 +60,9 @@ end)
 -- keybindings
 log('loading keybindings')
 globalkeys = awful.util.table.join(
+    awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey },            "r",     function () command_prompt[mouse.screen]:run() end)
 )
 root.keys(globalkeys)
-
-awesome.spawn('google-chrome')
 
 log('------------- started --------------')
