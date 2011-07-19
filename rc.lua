@@ -51,7 +51,7 @@ command_prompt = {}
 -- systray
 mysystray = widget({ type = "systray" })
 at_all_screens(function(screen)
-  topstatusbar[screen] = awful.wibox.new({ position = 'top', screen = screen })
+  topstatusbar[screen] = awful.wibox({ position = 'top', screen = screen })
 
   command_prompt[screen] = awful.widget.prompt({})
 
@@ -67,6 +67,8 @@ resf  = 10
 movef = 10
 log('loading keybindings')
 globalkeys = awful.util.table.join(
+
+    -- client switching bindings
     awful.key({ modkey,           }, "k",   function ()
       awful.client.focus.byidx(1)
       if client.focus then client.focus:raise() end
@@ -79,6 +81,7 @@ globalkeys = awful.util.table.join(
       awful.client.focus.history.previous()
       if client.focus then client.focus:raise() end
     end),
+
     -- client move/resize
     awful.key({ modkey, "Shift"   }, "Up",    function() awful.client.moveresize( 0, 0, 0, resf) end),
     awful.key({ modkey, "Shift"   }, "Right", function() awful.client.moveresize( 0, 0, resf, 0) end),
@@ -89,7 +92,10 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "Left",  function() awful.client.moveresize(-movef, 0, 0, 0) end),
     awful.key({ modkey, "Control" }, "Down",  function() awful.client.moveresize( 0, movef, 0, 0) end),
 
+    -- misc bindings
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+
+    -- awesome bindongs
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey            }, "r", function () command_prompt[mouse.screen]:run() end)
 )
