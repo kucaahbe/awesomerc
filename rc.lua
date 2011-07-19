@@ -26,6 +26,22 @@ log("config file:      '" .. conffile .. "'")
 
 beautiful.init(themefile)
 
+layouts =
+{
+    awful.layout.suit.floating,
+    awful.layout.suit.tile,
+    awful.layout.suit.tile.left,
+    awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.top,
+    awful.layout.suit.fair,
+    awful.layout.suit.fair.horizontal,
+    awful.layout.suit.spiral,
+    awful.layout.suit.spiral.dwindle,
+    awful.layout.suit.max,
+    awful.layout.suit.max.fullscreen,
+    awful.layout.suit.magnifier
+}
+
 -- tags
 local taglist = {
   { name = "main", selected = true },
@@ -44,6 +60,7 @@ at_all_screens(function(screen)
     tags[screen][i] = newtag
   end
 end)
+awful.layout.inc(layouts, 1)
 
 -- statusbars
 topstatusbar = {}
