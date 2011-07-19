@@ -61,6 +61,9 @@ at_all_screens(function(screen)
 end)
 
 -- keybindings
+-- resize factor:
+resf  = 10
+movef = 10
 log('loading keybindings')
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "k",   function ()
@@ -75,6 +78,16 @@ globalkeys = awful.util.table.join(
       awful.client.focus.history.previous()
       if client.focus then client.focus:raise() end
     end),
+    -- client move/resize
+    awful.key({ modkey, "Shift"   }, "Up",    function() awful.client.moveresize( 0, 0, 0, resf) end),
+    awful.key({ modkey, "Shift"   }, "Right", function() awful.client.moveresize( 0, 0, resf, 0) end),
+    awful.key({ modkey, "Shift"   }, "Left",  function() awful.client.moveresize( 0, 0,-resf, 0) end),
+    awful.key({ modkey, "Shift"   }, "Down",  function() awful.client.moveresize( 0, 0, 0,-resf) end),
+    awful.key({ modkey, "Control" }, "Up",    function() awful.client.moveresize( 0,-movef, 0, 0) end),
+    awful.key({ modkey, "Control" }, "Right", function() awful.client.moveresize( movef, 0, 0, 0) end),
+    awful.key({ modkey, "Control" }, "Left",  function() awful.client.moveresize(-movef, 0, 0, 0) end),
+    awful.key({ modkey, "Control" }, "Down",  function() awful.client.moveresize( 0, movef, 0, 0) end),
+
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey            }, "r", function () command_prompt[mouse.screen]:run() end)
