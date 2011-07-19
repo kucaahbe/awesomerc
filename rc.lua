@@ -60,6 +60,18 @@ end)
 -- keybindings
 log('loading keybindings')
 globalkeys = awful.util.table.join(
+    awful.key({ modkey,           }, "k",   function ()
+      awful.client.focus.byidx(1)
+      if client.focus then client.focus:raise() end
+    end),
+    awful.key({ modkey,           }, "j",   function ()
+      awful.client.focus.byidx(-1)
+      if client.focus then client.focus:raise() end
+    end),
+    awful.key({ modkey,           }, "Tab", function ()
+      awful.client.focus.history.previous()
+      if client.focus then client.focus:raise() end
+    end),
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey            }, "r", function () command_prompt[mouse.screen]:run() end)
