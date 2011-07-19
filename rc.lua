@@ -47,13 +47,16 @@ end)
 -- statusbars
 topstatusbar = {}
 command_prompt = {}
+-- systray
+mysystray = widget({ type = "systray" })
 at_all_screens(function(screen)
   topstatusbar[screen] = awful.wibox.new({ position = 'top', screen = screen })
 
   command_prompt[screen] = awful.widget.prompt({})
 
   topstatusbar[screen].widgets = {
-    command_prompt[screen]
+    command_prompt[screen],
+    mysystray
   }
 end)
 
