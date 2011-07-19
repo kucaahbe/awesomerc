@@ -15,6 +15,8 @@ require("awful.rules")
 local confdir   = awful.util.getdir('config')
 local conffile  = confdir .. '/rc.lua'
 local themefile = confdir .. '/themes/default/theme.lua'
+
+terminal = 'lilyterm'
 modkey = "Mod4"
 
 log("config directory: '" .. confdir   .. "'")
@@ -58,6 +60,7 @@ end)
 -- keybindings
 log('loading keybindings')
 globalkeys = awful.util.table.join(
+    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey            }, "r", function () command_prompt[mouse.screen]:run() end)
 )
