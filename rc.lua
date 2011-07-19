@@ -10,6 +10,7 @@ log('============= starting =============')
 -- awesome standard libs
 require('awful')
 require("awful.rules")
+require("awful.remote")
 
 -- variables
 local confdir   = awful.util.getdir('config')
