@@ -69,7 +69,7 @@ topstatusbar = {}
 bottomstatusbar = {}
 -- widgets
 command_prompt = {}
-mysystray = widget({ type = "systray" })
+systrayw = widget({ type = "systray" })
 
 at_all_screens(function(s)
 
@@ -81,7 +81,7 @@ at_all_screens(function(s)
       command_prompt[s],
       layout = awful.widget.layout.horizontal.leftright
     },
-    s==1 and mysystray or nil,
+    s==1 and systrayw or nil,
     layout = awful.widget.layout.horizontal.rightleft
   }
 end)
