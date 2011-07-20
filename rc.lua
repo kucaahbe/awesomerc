@@ -63,7 +63,7 @@ at_all_screens(function(screen)
     tags[screen][i] = newtag
   end
 end)
-awful.layout.inc(layouts, 1)
+awful.layout.inc(layouts, 0)
 
 -- widget boxes
 topstatusbar = {}
