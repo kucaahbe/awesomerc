@@ -92,6 +92,7 @@ tasklistw.buttons = awful.util.table.join(
                                           end)
 					  )
 systrayw = widget({ type = "systray" })
+textclockw = awful.widget.textclock()
 
 at_all_screens(function(s)
 
@@ -109,6 +110,7 @@ at_all_screens(function(s)
       command_prompt[s],
       layout = awful.widget.layout.horizontal.leftright
     },
+    textclockw,
     s==1 and systrayw or nil,
     delimiterw,
     tasklistw[s],
