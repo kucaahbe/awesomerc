@@ -48,7 +48,7 @@ layouts =
 local taglist = {
   { name = "main", selected = true },
   { name = "www"  },
-  { name = "trash" },
+  { name = "im" },
 }
 tags = {}
 at_all_screens(function(screen)
@@ -190,6 +190,14 @@ awful.rules.rules = {
       keys = clientkeys,
     }
   },
+  { rule = { class = "Iceweasel" }, properties = { tag = tags[mouse.screen][2] } },
+  { rule = { class = "Google-chrome" }, properties = { tag = tags[mouse.screen][2] } },
+  { rule = { class = "Skype" }, properties = { tag = tags[mouse.screen][3] } },
 }
+-- signals
+
+client.add_signal("manage", function (c, startup)
+  log(c.class .. ' * ' .. c.type .. ' * ' .. c.name)
+end)
 
 log('------------- started --------------')
