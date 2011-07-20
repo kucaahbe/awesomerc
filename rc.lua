@@ -69,15 +69,26 @@ topstatusbar = {}
 bottomstatusbar = {}
 -- widgets
 command_prompt = {}
+taglistw = {}
+taglistw.buttons = awful.util.table.join(
+  -- 1 left mouse button
+  -- 2 middle mouse button
+  -- 3 right mouse button
+  -- 4 mouse wheel forward
+  -- 5 mouse wheel backward
+  awful.button({ }, 1, awful.tag.viewonly)
+)
 systrayw = widget({ type = "systray" })
 
 at_all_screens(function(s)
 
   command_prompt[s] = awful.widget.prompt({})
+  taglistw = awful.widget.taglist(s, awful.widget.taglist.label.all, taglistw.buttons)
 
   bottomstatusbar[s] = awful.wibox({ position = 'bottom', screen = s })
   bottomstatusbar[s].widgets = {
     {
+      taglistw,
       command_prompt[s],
       layout = awful.widget.layout.horizontal.leftright
     },
