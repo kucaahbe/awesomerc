@@ -78,25 +78,40 @@ taglistw.buttons = awful.util.table.join(
   -- 5 mouse wheel backward
   awful.button({ }, 1, awful.tag.viewonly)
 )
-utf8bullet = widget({ type = "textbox" })
-utf8bullet.text = " | "
+delimiterw = widget({ type = "textbox" })
+delimiterw.text = " | "
 command_prompt = {}
+tasklistw = {}
+tasklistw.buttons = awful.util.table.join(
+                     awful.button({ }, 1, function (c)
+                                              if not c:isvisible() then
+                                                  awful.tag.viewonly(c:tags()[1])
+                                              end
+                                              client.focus = c
+                                              c:raise()
+                                          end)
+					  )
 systrayw = widget({ type = "systray" })
 
 at_all_screens(function(s)
 
   taglistw = awful.widget.taglist(s, awful.widget.taglist.label.all, taglistw.buttons)
   command_prompt[s] = awful.widget.prompt({})
+  tasklistw[s] = awful.widget.tasklist(function(c)
+    return awful.widget.tasklist.label.currenttags(c, s)
+  end, tasklistw.buttons)
 
   bottomstatusbar[s] = awful.wibox({ position = 'bottom', screen = s })
   bottomstatusbar[s].widgets = {
     {
       taglistw,
-      utf8bullet,
+      delimiterw,
       command_prompt[s],
       layout = awful.widget.layout.horizontal.leftright
     },
     s==1 and systrayw or nil,
+    delimiterw,
+    tasklistw[s],
     layout = awful.widget.layout.horizontal.rightleft
   }
 end)
