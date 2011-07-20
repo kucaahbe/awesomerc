@@ -193,11 +193,13 @@ awful.rules.rules = {
   { rule = { class = "Iceweasel" }, properties = { tag = tags[mouse.screen][2] } },
   { rule = { class = "Google-chrome" }, properties = { tag = tags[mouse.screen][2] } },
   { rule = { class = "Skype" }, properties = { tag = tags[mouse.screen][3] } },
+  { rule = { class = "MPlayer" }, properties = { floating = true, border_width = 3, border_color='red' } },
 }
 -- signals
 
 client.add_signal("manage", function (c, startup)
   log(c.class .. ' * ' .. c.type .. ' * ' .. c.name)
+  if c.class=="Skype" then awful.tag.viewonly(tags[mouse.screen][3])end
 end)
 
 log('------------- started --------------')
