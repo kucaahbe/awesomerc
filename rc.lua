@@ -48,6 +48,7 @@ layouts =
 local taglist = {
   { name = "main", selected = true },
   { name = "www"  },
+  { name = "trash" },
 }
 tags = {}
 at_all_screens(function(screen)
@@ -68,7 +69,6 @@ awful.layout.inc(layouts, 1)
 topstatusbar = {}
 bottomstatusbar = {}
 -- widgets
-command_prompt = {}
 taglistw = {}
 taglistw.buttons = awful.util.table.join(
   -- 1 left mouse button
@@ -78,17 +78,21 @@ taglistw.buttons = awful.util.table.join(
   -- 5 mouse wheel backward
   awful.button({ }, 1, awful.tag.viewonly)
 )
+utf8bullet = widget({ type = "textbox" })
+utf8bullet.text = " | "
+command_prompt = {}
 systrayw = widget({ type = "systray" })
 
 at_all_screens(function(s)
 
-  command_prompt[s] = awful.widget.prompt({})
   taglistw = awful.widget.taglist(s, awful.widget.taglist.label.all, taglistw.buttons)
+  command_prompt[s] = awful.widget.prompt({})
 
   bottomstatusbar[s] = awful.wibox({ position = 'bottom', screen = s })
   bottomstatusbar[s].widgets = {
     {
       taglistw,
+      utf8bullet,
       command_prompt[s],
       layout = awful.widget.layout.horizontal.leftright
     },
