@@ -68,13 +68,15 @@ command_prompt = {}
 -- systray
 mysystray = widget({ type = "systray" })
 at_all_screens(function(screen)
-  topstatusbar[screen] = awful.wibox({ position = 'top', screen = screen })
 
   command_prompt[screen] = awful.widget.prompt({})
 
+  topstatusbar[screen] = awful.wibox({ position = 'top', screen = screen })
   topstatusbar[screen].widgets = {
-    command_prompt[screen],
-    mysystray
+    {
+      layout = awful.widget.layout.horizontal.leftright
+    },
+      layout = awful.widget.layout.horizontal.rightleft
   }
 end)
 
