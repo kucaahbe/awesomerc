@@ -62,21 +62,25 @@ at_all_screens(function(screen)
 end)
 awful.layout.inc(layouts, 1)
 
--- statusbars
+-- widget boxes
 topstatusbar = {}
+bottomstatusbar = {}
+-- widgets
 command_prompt = {}
--- systray
 mysystray = widget({ type = "systray" })
-at_all_screens(function(screen)
 
-  command_prompt[screen] = awful.widget.prompt({})
+at_all_screens(function(s)
 
-  topstatusbar[screen] = awful.wibox({ position = 'top', screen = screen })
-  topstatusbar[screen].widgets = {
+  command_prompt[s] = awful.widget.prompt({})
+
+  bottomstatusbar[s] = awful.wibox({ position = 'bottom', screen = s })
+  bottomstatusbar[s].widgets = {
     {
+      command_prompt[s],
       layout = awful.widget.layout.horizontal.leftright
     },
-      layout = awful.widget.layout.horizontal.rightleft
+    s==1 and mysystray or nil,
+    layout = awful.widget.layout.horizontal.rightleft
   }
 end)
 
