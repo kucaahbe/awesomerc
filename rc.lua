@@ -151,6 +151,12 @@ globalkeys = awful.util.table.join(
 
     -- misc bindings
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey,           }, "d", function ()
+      local clients = client.get(mouse.screen)
+      for i,c in ipairs(clients) do
+	c.minimized = not c.minimized
+      end
+    end),
 
     -- awesome bindongs
     awful.key({ modkey, "Control" }, "r", awesome.restart),
