@@ -223,9 +223,9 @@ awful.rules.rules = {
       buttons = clientbuttons,
     }
   },
-  { rule = { class = "Iceweasel" }, properties = { tag = tags[mouse.screen][2] } },
-  { rule = { class = "Google-chrome" }, properties = { tag = tags[mouse.screen][2] } },
-  { rule = { class = "Skype" }, properties = { tag = tags[mouse.screen][3] } },
+  { rule = { class = "Iceweasel" }, properties = { tag = tags[mouse.screen][3] } },
+  { rule = { class = "Google-chrome" }, properties = { tag = tags[mouse.screen][3] } },
+  { rule = { class = "Skype" }, properties = { tag = tags[mouse.screen][4] } },
   { rule = { class = "MPlayer" }, properties = { floating = true, border_width = 3, border_color='red' } },
   { rule = { class = "Gvim" }, properties = { maximized_vertical = true, maximized_horizontal = true } },
 }
