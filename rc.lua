@@ -47,6 +47,7 @@ layouts =
 -- tags
 local taglist = {
   { name = "main", selected = true },
+  { name = "term" },
   { name = "www"  },
   { name = "im" },
 }
