@@ -150,16 +150,6 @@ globalkeys = awful.util.table.join(
       if client.focus then client.focus:raise() end
     end),
 
-    -- client move/resize
-    awful.key({ modkey, "Shift"   }, "Up",    function() awful.client.moveresize( 0, 0, 0, resf) end),
-    awful.key({ modkey, "Shift"   }, "Right", function() awful.client.moveresize( 0, 0, resf, 0) end),
-    awful.key({ modkey, "Shift"   }, "Left",  function() awful.client.moveresize( 0, 0,-resf, 0) end),
-    awful.key({ modkey, "Shift"   }, "Down",  function() awful.client.moveresize( 0, 0, 0,-resf) end),
-    awful.key({ modkey, "Control" }, "Up",    function() awful.client.moveresize( 0,-movef, 0, 0) end),
-    awful.key({ modkey, "Control" }, "Right", function() awful.client.moveresize( movef, 0, 0, 0) end),
-    awful.key({ modkey, "Control" }, "Left",  function() awful.client.moveresize(-movef, 0, 0, 0) end),
-    awful.key({ modkey, "Control" }, "Down",  function() awful.client.moveresize( 0, movef, 0, 0) end),
-
     -- misc bindings
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey,           }, "d", function ()
@@ -204,6 +194,8 @@ clientkeys = awful.util.table.join(
 )
 clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
+    awful.button({ modkey }, 1, awful.mouse.client.move),
+    awful.button({ modkey }, 3, awful.mouse.client.resize)
     )
 awful.rules.rules = {
   -- All clients will match this rule.
