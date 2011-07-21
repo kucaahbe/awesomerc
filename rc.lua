@@ -177,7 +177,13 @@ root.keys(globalkeys)
 
 -- clientkeys
 clientkeys = awful.util.table.join(
-    awful.key({ modkey,    }, "c", function (c) c:kill() end)
+    awful.key({ modkey,    }, "c", function (c) c:kill() end),
+    awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
+    awful.key({ modkey,           }, "m",
+        function (c)
+            c.maximized_horizontal = not c.maximized_horizontal
+            c.maximized_vertical   = not c.maximized_vertical
+        end)
 )
 awful.rules.rules = {
   -- All clients will match this rule.
