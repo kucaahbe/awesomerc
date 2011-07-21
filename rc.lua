@@ -138,12 +138,16 @@ globalkeys = awful.util.table.join(
 
     -- client switching bindings
     awful.key({ modkey,           }, "k",   function ()
+      local visible = awful.client.visible(mouse.screen)
       awful.client.focus.byidx(1)
-      if client.focus then client.focus:raise() end
+      if not client.focus then client.focus = visible[1] end
+      client.focus:raise()
     end),
     awful.key({ modkey,           }, "j",   function ()
+      local visible = awful.client.visible(mouse.screen)
       awful.client.focus.byidx(-1)
-      if client.focus then client.focus:raise() end
+      if not client.focus then client.focus = awful.util.table.reverse(visible)[1] end
+      client.focus:raise()
     end),
     awful.key({ modkey,           }, "Tab", function ()
       awful.client.focus.history.previous()
