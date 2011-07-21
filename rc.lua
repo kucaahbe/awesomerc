@@ -169,7 +169,7 @@ globalkeys = awful.util.table.join(
       end
     end),
 
-    -- awesome bindongs
+    -- awesome bindings
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey            }, "r", function () command_prompt[mouse.screen]:run() end)
 )
