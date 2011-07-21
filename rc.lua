@@ -202,6 +202,9 @@ clientkeys = awful.util.table.join(
             c.maximized_vertical   = not c.maximized_vertical
         end)
 )
+clientbuttons = awful.util.table.join(
+    awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
+    )
 awful.rules.rules = {
   -- All clients will match this rule.
   {
@@ -211,6 +214,7 @@ awful.rules.rules = {
       border_color = beautiful.border_normal,
       focus = true,
       keys = clientkeys,
+      buttons = clientbuttons,
     }
   },
   { rule = { class = "Iceweasel" }, properties = { tag = tags[mouse.screen][2] } },
