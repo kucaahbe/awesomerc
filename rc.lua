@@ -69,6 +69,8 @@ awful.layout.inc(layouts, 0)
 topstatusbar = {}
 bottomstatusbar = {}
 -- widgets
+ctitle = widget({ type = "textbox" })
+ctitle.text = ''
 taglistw = {}
 taglistw.buttons = awful.util.table.join(
   -- 1 left mouse button
@@ -101,6 +103,15 @@ at_all_screens(function(s)
   tasklistw[s] = awful.widget.tasklist(function(c)
     return awful.widget.tasklist.label.currenttags(c, s)
   end, tasklistw.buttons)
+
+  topstatusbar[s] = awful.wibox({ position = 'top', screen = s })
+  topstatusbar[s].widgets = {
+    {
+      ctitle,
+      layout = awful.widget.layout.horizontal.leftright
+    },
+    layout = awful.widget.layout.horizontal.rightleft
+  }
 
   bottomstatusbar[s] = awful.wibox({ position = 'bottom', screen = s })
   bottomstatusbar[s].widgets = {
@@ -213,6 +224,11 @@ awful.rules.rules = {
 client.add_signal("manage", function (c, startup)
   log(c.class .. ' * ' .. c.type .. ' * ' .. c.name)
   if c.class=="Skype" then awful.tag.viewonly(tags[mouse.screen][3])end
+  ctitle.text = c.class
+end)
+
+client.add_signal("focus", function (c, startup)
+  ctitle.text = c.class
 end)
 
 log('------------- started --------------')
