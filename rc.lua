@@ -45,26 +45,26 @@ layouts =
 }
 
 -- tags
-local taglist = {
-  { name = "main", selected = true },
-  { name = "term" },
-  { name = "www"  },
-  { name = "im" },
-}
 tags = {}
+tags.settings = {
+  { name = "main", layout = layouts[0] },
+  { name = "term", layout = layouts[2] },
+  { name = "www",  layout = layouts[0] },
+  { name = "im",   layout = layouts[0] },
+}
 at_all_screens(function(screen)
-  for i,tagdef in ipairs(taglist) do
+  for i,tagdef in ipairs(tags.settings) do
     log('adding tag(' .. tagdef.name .. ') to screen ' .. screen)
 
     local newtag    = tag({ name = tagdef.name })
     newtag.screen   = screen
-    newtag.selected = tagdef.selected or false
+    awful.tag.setproperty(newtag, "layout",   tagdef.layout)
 
     if not tags[screen] then tags[screen] = {} end
     tags[screen][i] = newtag
   end
 end)
-awful.layout.inc(layouts, 0)
+tags[mouse.screen][1].selected = true
 
 -- widget boxes
 topstatusbar = {}
