@@ -219,8 +219,8 @@ awful.rules.rules = {
   { rule = { class = "MPlayer" }, properties = { floating = true, border_width = 3, border_color='red' } },
   { rule = { class = "Gvim" }, properties = { maximized_vertical = true, maximized_horizontal = true, sticky = true } },
 }
--- signals
 
+-- signals
 client.add_signal("manage", function (c, startup)
   log(c.class .. ' * ' .. c.type .. ' * ' .. c.name)
   if c.class=="Skype" then awful.tag.viewonly(tags[mouse.screen][3])end
