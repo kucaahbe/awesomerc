@@ -69,6 +69,7 @@ awful.layout.inc(layouts, 0)
 topstatusbar = {}
 bottomstatusbar = {}
 -- widgets
+layoutboxw = {}
 ctitle = widget({ type = "textbox" })
 ctitle.text = ''
 taglistw = {}
@@ -98,6 +99,13 @@ textclockw = awful.widget.textclock()
 
 at_all_screens(function(s)
 
+  layoutboxw[s] = awful.widget.layoutbox(s)
+  layoutboxw[s]:buttons(awful.util.table.join(
+			 awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
+			 awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
+			 awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
+			 awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
+
   taglistw = awful.widget.taglist(s, awful.widget.taglist.label.all, taglistw.buttons)
   command_prompt[s] = awful.widget.prompt({})
   tasklistw[s] = awful.widget.tasklist(function(c)
@@ -116,6 +124,7 @@ at_all_screens(function(s)
   bottomstatusbar[s] = awful.wibox({ position = 'bottom', screen = s })
   bottomstatusbar[s].widgets = {
     {
+      layoutboxw[s],
       taglistw,
       delimiterw,
       command_prompt[s],
