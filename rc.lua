@@ -216,7 +216,6 @@ awful.rules.rules = {
   {
     rule = { },
     properties = {
-      tag = tags[mouse.screen][1],
       border_width = beautiful.border_width,
       border_color = beautiful.border_normal,
       focus = true,
@@ -233,7 +232,7 @@ awful.rules.rules = {
 
   { rule = { class = "MPlayer" }, properties = { floating = true, border_width = 3, border_color='red' } },
 
-  { rule = { class = "Gvim" }, properties = { maximized_vertical = true, maximized_horizontal = true, float = true } },
+  { rule = { class = "Gvim" }, properties = { maximized_vertical = true, maximized_horizontal = true, float = tru, tag = tags[mouse.screen][1], } },
 }
 
 -- signals
