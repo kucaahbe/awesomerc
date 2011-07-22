@@ -50,7 +50,7 @@ tags.settings = {
   { name = "main", layout = layouts[0] },
   { name = "term", layout = layouts[2] },
   { name = "www",  layout = layouts[0] },
-  { name = "im",   layout = layouts[0] },
+  { name = "im",   layout = layouts[2] },
 }
 at_all_screens(function(screen)
   for i,tagdef in ipairs(tags.settings) do
@@ -225,16 +225,24 @@ awful.rules.rules = {
   },
   { rule = { class = "Iceweasel" }, properties = { tag = tags[mouse.screen][3] } },
   { rule = { class = "Google-chrome" }, properties = { tag = tags[mouse.screen][3] } },
-  { rule = { class = "Skype" }, properties = { tag = tags[mouse.screen][4] } },
+
+  { rule = { class = "Skype", role = 'Chats'      }, properties = { tag = tags[mouse.screen][4], focus = false, minimized = true } },
+  { rule = { class = "Skype", role = 'MainWindow' }, properties = { tag = tags[mouse.screen][4], switchtotag = true, floating = true } },
+
   { rule = { class = "MPlayer" }, properties = { floating = true, border_width = 3, border_color='red' } },
   { rule = { class = "Gvim" }, properties = { maximized_vertical = true, maximized_horizontal = true } },
 }
 
 -- signals
 client.add_signal("manage", function (c, startup)
-  log(c.class .. ' * ' .. c.type .. ' * ' .. c.name)
-  if c.class=="Skype" then awful.tag.viewonly(tags[mouse.screen][3])end
+  log('\t' .. c.class .. ((c.role and ('.' .. c.role)) or '') .. '(' .. c.type .. ')' .. '\t' .. c.name)
+
   ctitle.text = c.class
+  if startup then
+  end
+end)
+client.add_signal("unmanage", function (c)
+  ctitle.text = ''
 end)
 
 client.add_signal("focus", function (c, startup)
