@@ -247,7 +247,7 @@ client.add_signal("unmanage", function (c)
   ctitle.text = ''
 end)
 
-client.add_signal("focus", function (c, startup)
+client.add_signal("focus", function (c)
   ctitle.text = c.class
 end)
 
