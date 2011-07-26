@@ -253,7 +253,4 @@ client.add_signal("focus", function (c)
   ctitle.text = c.class
 end)
 
-awful.tag.attached_add_signal(mouse.screen, "property::selected", function(t)
-end)
-
 log('------------- started --------------')
