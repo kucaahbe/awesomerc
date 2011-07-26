@@ -9,6 +9,7 @@ log('============= starting =============')
 
 -- awesome standard libs
 require('awful')
+require('awful.autofocus')
 require("awful.rules")
 require("awful.remote")
 
@@ -52,6 +53,7 @@ tags.settings = {
   { name = "www",  layout = layouts[0] },
   { name = "im",   layout = layouts[2] },
 }
+
 at_all_screens(function(screen)
   for i,tagdef in ipairs(tags.settings) do
     log('adding tag(' .. tagdef.name .. ') to screen ' .. screen)
