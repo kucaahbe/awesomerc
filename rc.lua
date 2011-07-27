@@ -239,18 +239,15 @@ awful.rules.rules = {
 
 -- signals
 client.add_signal("manage", function (c, startup)
-  log('\t' .. c.class .. ((c.role and ('.' .. c.role)) or '') .. '(' .. c.type .. ')' .. '\t' .. c.name)
+  log(c.class .. ((c.role and ('.' .. c.role)) or '') .. '(' .. c.type .. ')' .. '\t' .. c.name)
 
-  ctitle.text = c.class
   if startup then
   end
 end)
 client.add_signal("unmanage", function (c)
-  ctitle.text = ''
 end)
 
 client.add_signal("focus", function (c)
-  ctitle.text = c.class
 end)
 
 log('------------- started --------------')
